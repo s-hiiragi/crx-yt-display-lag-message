@@ -1,12 +1,9 @@
 const _main = () => {
-    console.log('_main: enter');
-
     const eVideo = document.querySelector('video.video-stream');
     const eProgressBar = document.querySelector('.ytp-progress-bar');
     const eContainer = document.querySelector('#chat-container');
 
     if (eVideo === null || eProgressBar === null || eContainer === null) {
-        console.log('_main: return false');
         return false;
     }
 
@@ -27,13 +24,11 @@ const _main = () => {
     eVideo.addEventListener('seeked', handler);
     eVideo.addEventListener('timeupdate', handler);
 
-    console.log('_main: return true');
     return true;
 };
 
 const main = () => {
     if (!_main()) {
-        console.log('main: retry');
         setTimeout(main, 1000);
     }
 };
