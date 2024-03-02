@@ -14,8 +14,6 @@ const _main = () => {
     const makeLagMessage = (s) => `リアルタイムから${s}秒ズレています。`;
     const handler = () => {
         if (eProgressBar.getAttribute('draggable') === null) {
-            console.log('Stop because of non DVR mode');
-
             eVideo.removeEventListener('play', handler);
             eVideo.removeEventListener('seeked', handler);
             eVideo.removeEventListener('timeupdate', handler);
