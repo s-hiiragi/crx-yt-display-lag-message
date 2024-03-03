@@ -14,7 +14,11 @@ const _main = () => {
     }
 
     const eMessage = document.createElement('div');
-    eMessage.style.cssText = 'color: red; font-size: 16px;';
+    eMessage.style.cssText = 'color: red; font-size: 16px; cursor: pointer;';
+    eMessage.onclick = () => {
+        eMessage.textContent = '';
+        eLiveBadge.click();
+    };
     eChatContainer.parentNode.insertBefore(eMessage, eChatContainer.nextSibling);
 
     const makeLagMessage = (s) => `リアルタイムから${s}秒ズレています。`;

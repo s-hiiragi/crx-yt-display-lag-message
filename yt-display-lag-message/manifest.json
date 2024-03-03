@@ -2,7 +2,7 @@
     "manifest_version" : 3,
     "name" : "YouTube Display Lag Message",
     "description" : "Display a message when a live stream is lagged",
-    "version" : "1.3",
+    "version" : "1.4",
 
     "host_permissions": [
         "https://www.youtube.com/*"
