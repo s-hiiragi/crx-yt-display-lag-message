@@ -4,5 +4,5 @@ This is a Google Chrome extension that displays a message when a live stream is 
 
 ## Issue
 
-- アーカイブ配信でメッセージが表示される
-  - ライブ配信 or アーカイブ配信を判定する方法が分からない
+- 配信ページから別の配信ページに移動するとうまく動かない
+  - MutationObserverでvideo要素のsrcの変化を監視する？
