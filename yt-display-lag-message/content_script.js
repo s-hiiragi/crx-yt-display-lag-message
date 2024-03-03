@@ -1,3 +1,7 @@
+console.debug = ()=>{};
+
+console.debug('content_script: enter');
+
 const _main = () => {
     const eVideo = document.querySelector('video.video-stream');
     const eProgressBar = document.querySelector('.ytp-progress-bar');
@@ -5,17 +9,8 @@ const _main = () => {
     const eChatContainer = document.querySelector('#chat-container');
 
     if (eVideo === null || eProgressBar === null || eLiveBadge === null || eChatContainer === null) {
+        console.debug('_main: return false (want to retry)');
         return false;
-    }
-
-    if (window.getComputedStyle(document.querySelector('.ytp-live-badge')).display === 'none') {
-        //console.debug('_main: Stop because of archive');
-        return true;
-    }
-
-    if (eProgressBar.getAttribute('draggable') === null) {
-        //console.debug('_main: Stop because of non DVR mode');
-        return true;
     }
 
     const eMessage = document.createElement('div');
@@ -24,6 +19,17 @@ const _main = () => {
 
     const makeLagMessage = (s) => `リアルタイムから${s}秒ズレています。`;
     const handler = () => {
+        if (window.getComputedStyle(document.querySelector('.ytp-live-badge')).display === 'none') {
+            console.debug('handler: return (stream archive)');
+            eMessage.textContent = '';
+            return;
+        }
+        if (eProgressBar.getAttribute('draggable') === null) {
+            console.debug('handler: return (non DVR mode)');
+            eMessage.textContent = '';
+            return;
+        }
+
         const now = parseInt(eProgressBar.getAttribute('aria-valuenow'));
         const max = parseInt(eProgressBar.getAttribute('aria-valuemax'));
         const eps = 5;
@@ -31,10 +37,10 @@ const _main = () => {
         eMessage.textContent = (delta > eps) ? makeLagMessage(delta) : '';
     };
 
-    eVideo.addEventListener('play', handler);
     eVideo.addEventListener('seeked', handler);
     eVideo.addEventListener('timeupdate', handler);
 
+    console.debug('_main: return true (started)');
     return true;
 };
 
